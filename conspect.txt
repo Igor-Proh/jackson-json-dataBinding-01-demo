@@ -1,0 +1,58 @@
+JSON - Java Script Object Notation - plain text Data
+
+	Java JSON Data Binding(JJDB) - converting JSON to POJA
+
+    -> JSON (англ. JavaScript Object Notation, укр. запис об'єктів JavaScript, вимовляється джéйсон)
+	    — це текстовий формат обміну даними між комп'ютерами. JSON базується на тексті, може бути прочитаним людиною.
+	      Формат дає змогу описувати об'єкти та інші структури даних. Цей формат використовується переважно для
+	      передавання структурованої інформації через мережу (завдяки процесу, що називають серіалізацією).
+
+    -> POJO (англ. Plain Old Java Object) — „Простий старий Java-об'єкт“, простий Java-об'єкт,
+	 не успадкований від якогось специфічного об'єкта і який не реалізує жодних службових
+	 інтерфейсів окрім тих, які потрібні для бізнес-моделі.
+
+	- JJDB with Jackson
+
+	---	JSON -- Call setXXX methods -> JAVA POJO
+
+		import com.fasterxml.jackson.databind.ObjectMapper;
+
+	public class Driver{
+		psvm(){
+
+		// create Object mapper
+		ObjectMapper mapper = new ObjectMapper();
+
+		// read JSON from file and map/convert to Java POJO
+		Student myStudent = mapper.readValue(new File("data/sample.json"), Student.class);
+
+		// print individual items
+		System.out.println(myStudent.getFirstName);
+		System.out.println(myStudent.getLastName);
+
+		}
+
+	}
+
+	---	 POJO -- Call getXXX methods -> JSON
+
+		// create Object mapper
+		ObjectMapper mapper = new ObjectMapper();
+
+		// read JSON from file and map/convert to Java POJO
+		Student myStudent = mapper.readValue(new File("data/sample.json"), Student.class);
+
+		// write JSON to output File
+		mapper.enable(SeriallizationFeature.INDENT_OUTPUT);
+		// Jackson calls getter methods on Student POJO to create JSON output file
+		mapper.writeValue(new File("data/output.json"),myStudent);
+
+		Spring automatically have Jackson integration
+
+		- JSON data being passed to Rest controller is converted to POJO
+		- JAVA object being returned from REST controller is converted to JSON
+
+
+	--- To ignore unknown properties use
+
+	@JsonIgnoreProperties(ignoreUnknown=true) at class with this properties

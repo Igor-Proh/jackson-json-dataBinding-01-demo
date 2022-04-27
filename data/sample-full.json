@@ -1,0 +1,15 @@
+{
+	"id": 14,
+	"firstName": "Ihor",
+	"lastName": "Proh",
+	"active": true,
+	"address": {
+		"street": "5 Main St",
+		"city": "Kyiv",
+		"state": "Vishn",
+		"zip": "02140",
+		"country": "Ukraine"
+	},
+	"languages" : ["Java", "C#", "Python", "Javascript"],
+	"company": "Roshen"
+}
